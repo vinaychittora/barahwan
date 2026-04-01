@@ -24,6 +24,48 @@ const form = document.querySelector('#interest');
 const statusText = document.querySelector('.form-status');
 
 if (form) {
+  const sendInterest = async (payload) => {
+    const primaryResponse = await fetch('/api/interest', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (primaryResponse.ok) {
+      return primaryResponse;
+    }
+
+    const failure = await readErrorResponse(primaryResponse);
+    const fallbackUrl = window.BARAHWAN_API_FALLBACK;
+    const shouldTryFallback = failure.reason === 'cloudflare_upstream_502' && fallbackUrl;
+
+    if (!shouldTryFallback) {
+      if (failure.reason === 'timeout-or-duplicate') {
+        throw new Error('Verification expired. Please complete Turnstile again and resubmit.');
+      }
+      const detail = failure.reason ? ` (${failure.reason})` : '';
+      throw new Error((failure.error || 'Submission failed.') + detail);
+    }
+
+    statusText.textContent = 'Primary route failed, retrying through fallback endpoint...';
+    const fallbackResponse = await fetch(fallbackUrl, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (fallbackResponse.ok) {
+      return fallbackResponse;
+    }
+
+    const fallbackFailure = await readErrorResponse(fallbackResponse);
+    if (fallbackFailure.reason === 'timeout-or-duplicate') {
+      throw new Error('Verification expired. Please complete Turnstile again and resubmit.');
+    }
+    const detail = fallbackFailure.reason ? ` (${fallbackFailure.reason})` : '';
+    throw new Error((fallbackFailure.error || 'Submission failed.') + detail);
+  };
+
   const readErrorResponse = async (response) => {
     const contentType = response.headers.get('content-type') || '';
     if (contentType.includes('application/json')) {
@@ -75,20 +117,7 @@ if (form) {
     };
 
     try {
-      const response = await fetch('/api/interest', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) {
-        const failure = await readErrorResponse(response);
-        if (failure.reason === 'timeout-or-duplicate') {
-          throw new Error('Verification expired. Please complete Turnstile again and resubmit.');
-        }
-        const detail = failure.reason ? ` (${failure.reason})` : '';
-        throw new Error((failure.error || 'Submission failed.') + detail);
-      }
+      await sendInterest(payload);
 
       statusText.textContent = 'Proposal received. We will reach out shortly.';
       submit.textContent = 'Sent';

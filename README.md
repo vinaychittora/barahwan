@@ -94,8 +94,13 @@ Set these in **Cloudflare Pages → Settings → Environment variables**:
 
 ### Turnstile site key in the frontend
 
-`index.html` currently uses Cloudflare's test site key for development.
-Replace it with your production site key before going live.
+`index.html` should use your production Turnstile site key in the form widget.
+Current value is set for `barahwan.org`; update it if your widget changes.
+
+### Optional custom-domain fallback for API route
+
+`index.html` also exposes `window.BARAHWAN_API_FALLBACK` (defaults to `https://barahwan.pages.dev/api/interest`).
+If the custom domain route returns an upstream HTML 502, frontend retries once against this fallback URL.
 
 ### Common failure reason
 
