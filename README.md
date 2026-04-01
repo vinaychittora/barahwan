@@ -102,6 +102,14 @@ Current value is set for `barahwan.org`; update it if your widget changes.
 `index.html` also exposes `window.BARAHWAN_API_FALLBACK` (defaults to `https://barahwan.pages.dev/api/interest`).
 If the custom domain route returns an upstream HTML 502, frontend retries once against this fallback URL.
 
+### Direct email route (new default)
+
+Frontend now tries a direct form relay first using:
+
+- `window.BARAHWAN_DIRECT_FORM_ENDPOINT` (currently `https://formsubmit.co/ajax/hello@caneandcamera.com`)
+
+If this succeeds, no Cloudflare Function call is required. If it fails, frontend falls back to `/api/interest` and then to `BARAHWAN_API_FALLBACK`.
+
 ### Common failure reason
 
 If `/api/interest` returns bot-validation errors, confirm that:

@@ -24,7 +24,42 @@ const form = document.querySelector('#interest');
 const statusText = document.querySelector('.form-status');
 
 if (form) {
+  const sendDirectForm = async (payload) => {
+    const endpoint = window.BARAHWAN_DIRECT_FORM_ENDPOINT;
+    if (!endpoint) {
+      return { attempted: false, ok: false, reason: 'direct_endpoint_missing' };
+    }
+
+    const formData = new FormData();
+    formData.append('name', payload.name);
+    formData.append('email', payload.email);
+    formData.append('type', payload.type);
+    formData.append('message', payload.message);
+    formData.append('_subject', `Barahwan interest: ${payload.type}`);
+    formData.append('_template', 'table');
+    formData.append('_captcha', 'true');
+    formData.append('_honey', payload.website || '');
+
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: formData
+    });
+
+    if (response.ok) {
+      return { attempted: true, ok: true, reason: '' };
+    }
+
+    return { attempted: true, ok: false, reason: `direct_form_${response.status}` };
+  };
+
   const sendInterest = async (payload) => {
+    const directResult = await sendDirectForm(payload);
+    if (directResult.ok) {
+      return { ok: true };
+    }
+
+    statusText.textContent = 'Direct route failed, retrying through API endpoint...';
     const primaryResponse = await fetch('/api/interest', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
@@ -32,19 +67,20 @@ if (form) {
     });
 
     if (primaryResponse.ok) {
-      return primaryResponse;
+      return { ok: true };
     }
 
     const failure = await readErrorResponse(primaryResponse);
+    if (failure.reason === 'timeout-or-duplicate') {
+      throw new Error('Verification expired. Please complete Turnstile again and resubmit.');
+    }
+
     const fallbackUrl = window.BARAHWAN_API_FALLBACK;
     const shouldTryFallback = failure.reason === 'cloudflare_upstream_502' && fallbackUrl;
-
     if (!shouldTryFallback) {
-      if (failure.reason === 'timeout-or-duplicate') {
-        throw new Error('Verification expired. Please complete Turnstile again and resubmit.');
-      }
+      const directReason = directResult.attempted ? ` [direct:${directResult.reason}]` : '';
       const detail = failure.reason ? ` (${failure.reason})` : '';
-      throw new Error((failure.error || 'Submission failed.') + detail);
+      throw new Error((failure.error || 'Submission failed.') + detail + directReason);
     }
 
     statusText.textContent = 'Primary route failed, retrying through fallback endpoint...';
@@ -55,7 +91,7 @@ if (form) {
     });
 
     if (fallbackResponse.ok) {
-      return fallbackResponse;
+      return { ok: true };
     }
 
     const fallbackFailure = await readErrorResponse(fallbackResponse);
