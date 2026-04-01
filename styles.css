@@ -150,6 +150,17 @@ h2 { font-size: clamp(1.65rem, 3.8vw, 2.9rem); }
 }
 .phase-card ul { padding-left: 1rem; margin: .6rem 0 0; }
 .split-flow { margin-top: 1rem; }
+
+.small-note {
+  margin: .2rem 0 .8rem;
+  color: #4f4338;
+  font-size: .95rem;
+}
+.split-flow hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: .9rem 0;
+}
 .bars { display: grid; gap: .6rem; }
 .bars div {
   display: flex;
