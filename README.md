@@ -68,9 +68,14 @@ If you are reading this, thank you for your interest.
 
 Barahwan is a serious idea project I care about deeply and have been shaping for a long time. Every collaboration that is ethical, practical, and field-honest is welcome.
 
+Primary contact for proposals: **hello@caneandcamera.com**.
+
 ---
 
 ## Form delivery and abuse protection
+
+> Current live path: the website now asks people to send proposals directly to `hello@caneandcamera.com` for reliability.
+> The API/form notes below are kept for reference if the server flow is re-enabled.
 
 The interest form now posts to a Cloudflare Pages Function endpoint:
 
