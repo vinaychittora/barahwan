@@ -28,10 +28,17 @@ if (form) {
     event.preventDefault();
     const submit = form.querySelector('button[type="submit"]');
     submit.disabled = true;
-    statusText.textContent = 'Sending...';
 
     const turnstileToken =
       window.turnstile && window.turnstile.getResponse ? window.turnstile.getResponse() : '';
+
+    if (!turnstileToken) {
+      statusText.textContent = 'Please complete bot verification and try again.';
+      submit.disabled = false;
+      return;
+    }
+
+    statusText.textContent = 'Sending...';
 
     const payload = {
       name: form.name.value,
@@ -51,7 +58,11 @@ if (form) {
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.error || 'Submission failed.');
+        if (data.reason === 'timeout-or-duplicate') {
+          throw new Error('Verification expired. Please complete Turnstile again and resubmit.');
+        }
+        const detail = data.reason ? ` (${data.reason})` : '';
+        throw new Error((data.error || 'Submission failed.') + detail);
       }
 
       statusText.textContent = 'Proposal received. We will reach out shortly.';
@@ -64,6 +75,9 @@ if (form) {
       statusText.textContent = error.message || 'Something went wrong. Please try again.';
       submit.disabled = false;
       submit.textContent = 'Send proposal';
+      if (window.turnstile && window.turnstile.reset) {
+        window.turnstile.reset();
+      }
     }
   });
 }

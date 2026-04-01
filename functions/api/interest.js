@@ -44,10 +44,11 @@ async function verifyTurnstile(token, ip, secret) {
 
 async function sendEmail(env, fields) {
   const recipient = env.CONTACT_EMAIL || 'hello@caneandcamera.com';
+  const sender = env.FROM_EMAIL || 'no-reply@barahwan.org';
   const payload = {
     personalizations: [{ to: [{ email: recipient }] }],
     from: {
-      email: env.FROM_EMAIL || 'barahwan-form@pages.dev',
+      email: sender,
       name: 'Barahwan Website'
     },
     reply_to: { email: fields.email, name: fields.name },
@@ -73,7 +74,12 @@ async function sendEmail(env, fields) {
     body: JSON.stringify(payload)
   });
 
-  return response.ok;
+  if (response.ok) {
+    return { ok: true, status: response.status, detail: '' };
+  }
+
+  const detail = (await response.text()).slice(0, 300);
+  return { ok: false, status: response.status, detail };
 }
 
 export async function onRequestPost(context) {
@@ -135,9 +141,13 @@ export async function onRequestPost(context) {
     return jsonResponse(403, { ok: false, error: 'Bot validation failed.', reason: verification.reason || 'turnstile_failed' });
   }
 
-  const sent = await sendEmail(env, { name, email, type, message });
-  if (!sent) {
-    return jsonResponse(502, { ok: false, error: 'Unable to deliver message.' });
+  const delivery = await sendEmail(env, { name, email, type, message });
+  if (!delivery.ok) {
+    return jsonResponse(502, {
+      ok: false,
+      error: 'Unable to deliver message.',
+      reason: delivery.detail || `mailchannels_${delivery.status}`
+    });
   }
 
   return jsonResponse(200, { ok: true });

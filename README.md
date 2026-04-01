@@ -103,3 +103,13 @@ If `/api/interest` returns bot-validation errors, confirm that:
 - your frontend Turnstile **site key** and backend `TURNSTILE_SECRET` are from the same Turnstile widget
 - the domain (`barahwan.org`) is allowed in Turnstile settings
 - you are not mixing test keys with production keys
+
+### Why you may see `502` first, then `403 timeout-or-duplicate`
+
+This sequence usually means:
+
+1. Turnstile token was valid and consumed on first submit.
+2. Email delivery failed upstream (MailChannels) causing `502`.
+3. Retrying with the same token triggers Turnstile duplicate rejection (`403 timeout-or-duplicate`).
+
+The frontend now resets Turnstile after failed submissions so users can solve a fresh challenge before retrying.
