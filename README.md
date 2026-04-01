@@ -95,3 +95,11 @@ Set these in **Cloudflare Pages → Settings → Environment variables**:
 
 `index.html` currently uses Cloudflare's test site key for development.
 Replace it with your production site key before going live.
+
+### Common failure reason
+
+If `/api/interest` returns bot-validation errors, confirm that:
+
+- your frontend Turnstile **site key** and backend `TURNSTILE_SECRET` are from the same Turnstile widget
+- the domain (`barahwan.org`) is allowed in Turnstile settings
+- you are not mixing test keys with production keys

@@ -16,6 +16,10 @@ function clean(value, max = 600) {
   return String(value || '').replace(/\s+/g, ' ').trim().slice(0, max);
 }
 
+function cleanToken(value, max = 4096) {
+  return String(value || '').trim().slice(0, max);
+}
+
 async function verifyTurnstile(token, ip, secret) {
   const form = new URLSearchParams();
   form.set('secret', secret);
@@ -27,9 +31,15 @@ async function verifyTurnstile(token, ip, secret) {
     body: form
   });
 
-  if (!result.ok) return false;
+  if (!result.ok) {
+    return { success: false, reason: 'turnstile_api_unreachable' };
+  }
+
   const data = await result.json();
-  return Boolean(data.success);
+  return {
+    success: Boolean(data.success),
+    reason: Array.isArray(data['error-codes']) ? data['error-codes'].join(',') : ''
+  };
 }
 
 async function sendEmail(env, fields) {
@@ -104,7 +114,7 @@ export async function onRequestPost(context) {
   const email = clean(body.email, 180);
   const type = clean(body.type, 140);
   const message = clean(body.message, 1500);
-  const token = clean(body.turnstileToken, 1200);
+  const token = cleanToken(body.turnstileToken, 4096);
 
   if (!name || !email || !type || !message || !token) {
     return jsonResponse(400, { ok: false, error: 'Missing required fields.' });
@@ -120,9 +130,9 @@ export async function onRequestPost(context) {
   }
 
   const ip = request.headers.get('CF-Connecting-IP');
-  const isHuman = await verifyTurnstile(token, ip, secret);
-  if (!isHuman) {
-    return jsonResponse(403, { ok: false, error: 'Bot validation failed.' });
+  const verification = await verifyTurnstile(token, ip, secret);
+  if (!verification.success) {
+    return jsonResponse(403, { ok: false, error: 'Bot validation failed.', reason: verification.reason || 'turnstile_failed' });
   }
 
   const sent = await sendEmail(env, { name, email, type, message });
