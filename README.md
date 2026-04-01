@@ -67,3 +67,31 @@ Then visit:
 If you are reading this, thank you for your interest.
 
 Barahwan is a serious idea project I care about deeply and have been shaping for a long time. Every collaboration that is ethical, practical, and field-honest is welcome.
+
+---
+
+## Form delivery and abuse protection
+
+The interest form now posts to a Cloudflare Pages Function endpoint:
+
+- `POST /api/interest`
+
+It sends entries to email using MailChannels and includes abuse controls:
+
+- Cloudflare Turnstile validation
+- honeypot field trap (`website`)
+- strict field validation and payload-size check
+- origin + referer checks
+
+### Required Cloudflare Pages environment variables
+
+Set these in **Cloudflare Pages → Settings → Environment variables**:
+
+- `TURNSTILE_SECRET` — your Turnstile secret key
+- `CONTACT_EMAIL` — destination inbox (example: `hello@caneandcamera.com`)
+- `FROM_EMAIL` — sender identity for MailChannels (example: `barahwan-form@pages.dev`)
+
+### Turnstile site key in the frontend
+
+`index.html` currently uses Cloudflare's test site key for development.
+Replace it with your production site key before going live.

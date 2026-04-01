@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   </head>
   <body>
     <div class="noise"></div>
@@ -281,10 +282,10 @@
         </div>
 
         <form id="interest" class="card form-grid">
-          <label>Name<input type="text" required /></label>
-          <label>Email<input type="email" required /></label>
+          <label>Name<input type="text" name="name" required /></label>
+          <label>Email<input type="email" name="email" required /></label>
           <label>Contribution type
-            <select>
+            <select name="type" required>
               <option>Land partnership</option>
               <option>Architecture / mud building</option>
               <option>Water / sanitation systems</option>
@@ -296,8 +297,11 @@
             </select>
           </label>
           <label>Proposal details
-            <textarea rows="5" placeholder="Tell us how you want to contribute to Phase 1, Phase 2, or Phase 3."></textarea>
+            <textarea name="message" rows="5" required placeholder="Tell us how you want to contribute to Phase 1, Phase 2, or Phase 3."></textarea>
           </label>
+          <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA"></div>
+          <p class="form-status" aria-live="polite"></p>
           <button type="submit" class="btn btn-primary">Send proposal</button>
         </form>
       </section>

@@ -186,6 +186,20 @@ input,select,textarea {
   background: #fffdf9;
 }
 
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.form-status {
+  margin: 0;
+  min-height: 1.2rem;
+  font-size: .92rem;
+  color: #4d433a;
+}
+
 .closing {
   text-align: center;
   padding-bottom: 7rem;
