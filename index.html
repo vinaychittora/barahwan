@@ -6,358 +6,296 @@
     <title>The Living Field — Barahwan</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="noise"></div>
     <header class="site-header">
-      <div class="brand">The Living Field — Barahwan</div>
+      <a class="brand" href="#top">The Living Field — Barahwan</a>
       <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
       <nav>
-        <a href="#why">Why</a>
-        <a href="#systems">Systems</a>
-        <a href="#economics">Viability</a>
+        <a href="#idea">Idea</a>
+        <a href="#importance">Why it matters</a>
+        <a href="#how">How it works</a>
+        <a href="#phases">Phases</a>
         <a href="#join">Join</a>
+        <a href="#future">Hope</a>
       </nav>
     </header>
 
     <main>
-      <section class="hero section" id="top">
+      <section id="top" class="section hero">
         <div class="section-header">
-          <p class="eyebrow">Kota/Jhalawar, Rajasthan · A twelve-village landscape idea</p>
+          <p class="eyebrow">In the lap of Mukundara · twelve ancient tribal villages, one shared landscape</p>
           <h1>The Living Field — Barahwan</h1>
           <p class="subtitle">A low-impact habitat campus for staying, learning, growing, and coexisting.</p>
           <p>
-            Barahwan is a proposed rural model for resilient living, ecological learning, habitat-sensitive stay,
-            and collaborative stewardship. It is designed to be financially modest, operationally resilient, and
-            rooted in the realities of land, water, labour, and dignity.
+            Barahwan is conceived as a grounded model for ecological living and rural resilience, shaped by the
+            interdependencies between land, water, village knowledge, and people who choose to participate with care.
           </p>
           <div class="cta-row">
             <a href="#join" class="btn btn-primary">Join the idea</a>
             <a href="#join" class="btn btn-secondary">Offer land, skill, support, or partnership</a>
           </div>
         </div>
-        <div class="hero-graphic card">
-          <svg viewBox="0 0 920 560" aria-label="Illustrated Barahwan habitat campus concept">
+
+        <article class="hero-graphic card">
+          <svg viewBox="0 0 1200 620" aria-label="Isometric campus model illustration">
             <defs>
-              <linearGradient id="ground" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#c89d6d" />
-                <stop offset="1" stop-color="#b28253" />
+              <linearGradient id="terrain" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#d8b48d" />
+                <stop offset="1" stop-color="#b68556" />
+              </linearGradient>
+              <linearGradient id="pond" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#7d9ba7" />
+                <stop offset="1" stop-color="#5f7b86" />
               </linearGradient>
             </defs>
-            <rect width="920" height="560" fill="#efe3d4" />
-            <path d="M0 380 C180 340,300 420,500 360 C620 320,780 390,920 340 L920 560 L0 560 Z" fill="url(#ground)" />
-            <circle cx="120" cy="120" r="34" fill="#d2a15e" opacity="0.8" />
-            <g fill="none" stroke="#8e6846" stroke-width="2" opacity="0.35">
-              <path d="M20 90 Q180 20 300 100" />
-              <path d="M300 100 Q430 180 560 110" />
-              <path d="M560 110 Q690 45 870 120" />
+            <rect width="1200" height="620" fill="#efe4d7" />
+            <path d="M0 430 C220 330 450 460 640 395 C835 330 990 420 1200 350 L1200 620 L0 620 Z" fill="url(#terrain)" />
+            <g stroke="#8f6f4e" stroke-width="2" opacity=".3" fill="none">
+              <path d="M55 125 Q250 40 420 130"/><path d="M420 130 Q640 220 820 125"/><path d="M820 125 Q980 70 1160 132"/>
             </g>
-            <g transform="translate(60 255)">
-              <rect x="0" y="40" width="130" height="70" rx="8" fill="#b67b47" />
-              <polygon points="-10,40 65,-8 140,40" fill="#885d38" />
-              <text x="15" y="132">Earthen homes</text>
+
+            <g transform="translate(145 320)">
+              <polygon points="0,88 130,18 260,88 130,154" fill="#d6ac7f" stroke="#825d3a" />
+              <polygon points="130,18 130,154 270,85 270,-50" fill="#b57a47" stroke="#7a5434" />
+              <polygon points="130,18 0,88 140,12 270,-50" fill="#8f5f39" stroke="#6c472d" />
+              <text x="52" y="176">Phase 1 Dorm base</text>
             </g>
-            <g transform="translate(245 255)">
-              <rect x="0" y="45" width="160" height="65" rx="10" fill="#ad7748" />
-              <polygon points="-12,45 80,0 172,45" fill="#7f5534" />
-              <text x="48" y="132">Dorm cluster</text>
+
+            <g transform="translate(430 344)">
+              <polygon points="0,56 74,20 148,56 74,94" fill="#cab08c" stroke="#7e6242" />
+              <polygon points="74,20 74,94 166,54 166,-10" fill="#a88966" stroke="#6c5337" />
+              <polygon points="74,20 0,56 92,16 166,-10" fill="#7f6548" stroke="#5d4833" />
+              <text x="12" y="123">Tent commons</text>
             </g>
-            <g transform="translate(470 230)">
-              <rect x="0" y="62" width="140" height="58" rx="8" fill="#9e6f43" />
-              <rect x="26" y="35" width="88" height="27" rx="4" fill="#687a64" />
-              <text x="7" y="142">Workshop + shade</text>
+
+            <g transform="translate(618 318)">
+              <polygon points="0,72 95,26 190,72 95,122" fill="#d3aa7d" stroke="#7a5738" />
+              <polygon points="95,26 95,122 220,64 220,-16" fill="#ac7546" stroke="#714c31" />
+              <polygon points="95,26 0,72 125,18 220,-16" fill="#865a37" stroke="#614028" />
+              <text x="24" y="154">Workshop court (Phase 2)</text>
             </g>
-            <g transform="translate(650 285)">
-              <polygon points="0,80 45,20 90,80" fill="#70676b" />
-              <polygon points="88,80 133,24 178,80" fill="#5f575b" />
-              <text x="24" y="112">Tent zone</text>
+
+            <ellipse cx="968" cy="420" rx="128" ry="58" fill="url(#pond)" stroke="#496470" />
+            <text x="915" y="426" fill="#e9f0f4">Seasonal pond</text>
+
+            <rect x="760" y="478" width="190" height="32" rx="8" fill="#6b8a73"/>
+            <text x="790" y="470">Closed reed-bed zone</text>
+
+            <rect x="570" y="515" width="130" height="28" rx="7" fill="#8c6e52" />
+            <text x="493" y="560">Underground rainwater storage</text>
+
+            <g fill="#70875f">
+              <circle cx="430" cy="470" r="20"/><circle cx="470" cy="446" r="24"/><circle cx="512" cy="472" r="22"/><circle cx="550" cy="446" r="23"/>
             </g>
-            <ellipse cx="690" cy="400" rx="85" ry="44" fill="#728c96" />
-            <text x="650" y="405" fill="#f6f3ef">Pond</text>
-            <g fill="#6e845d">
-              <circle cx="390" cy="392" r="18" />
-              <circle cx="430" cy="374" r="20" />
-              <circle cx="465" cy="400" r="17" />
-              <circle cx="520" cy="386" r="18" />
+            <text x="414" y="520">Orchard + habitat edge</text>
+
+            <g stroke="#554736" stroke-width="3" fill="none" opacity=".75">
+              <path d="M96 500 C330 382 590 458 826 344" />
+              <path d="M826 344 C932 302 1028 324 1135 286" />
             </g>
-            <text x="362" y="432">Orchard / food forest</text>
-            <rect x="102" y="430" width="165" height="28" rx="5" fill="#698773" />
-            <text x="105" y="421">Reed-bed filtration</text>
-            <rect x="280" y="456" width="92" height="22" rx="4" fill="#8f6f56" />
-            <text x="248" y="490">Underground rainwater tank</text>
-            <g stroke="#5b4f3d" stroke-width="3" fill="none" opacity="0.7">
-              <path d="M80 430 C220 360 360 430 530 360" />
-              <path d="M530 360 C650 325 730 350 860 315" />
-            </g>
-            <g fill="#41372f" opacity="0.75">
-              <circle cx="200" cy="350" r="6" />
-              <circle cx="230" cy="338" r="5" />
-              <circle cx="610" cy="330" r="6" />
-            </g>
-            <g fill="none" stroke="#4b463f" stroke-width="1.6" opacity="0.75">
-              <path d="M760 120 q18 -14 32 0" />
-              <path d="M788 110 q16 -11 26 0" />
-            </g>
-            <g transform="translate(770 220)">
-              <circle cx="0" cy="0" r="74" fill="none" stroke="#7f6a52" stroke-dasharray="5 6" />
-              <text x="-30" y="6">12 villages</text>
+
+            <g transform="translate(930 175)">
+              <circle cx="0" cy="0" r="92" fill="none" stroke="#7c634b" stroke-dasharray="6 8"/>
+              <g fill="#6b5642">
+                <circle cx="0" cy="-74" r="7"/><circle cx="38" cy="-62" r="7"/><circle cx="65" cy="-32" r="7"/><circle cx="73" cy="7" r="7"/><circle cx="58" cy="45" r="7"/><circle cx="23" cy="70" r="7"/><circle cx="-18" cy="73" r="7"/><circle cx="-56" cy="54" r="7"/><circle cx="-75" cy="17" r="7"/><circle cx="-71" cy="-23" r="7"/><circle cx="-45" cy="-57" r="7"/><circle cx="-8" cy="-73" r="7"/>
+              </g>
+              <text x="-58" y="120">Barahwan · 12 villages</text>
             </g>
           </svg>
+        </article>
+      </section>
+
+      <section id="idea" class="section">
+        <div class="section-header">
+          <p class="eyebrow">1 · The idea</p>
+          <h2>Not a resort. A living field model.</h2>
+          <p>
+            Barahwan is a hybrid of field station, low-impact stay campus, school learning space, volunteer residency,
+            and regenerative landscape lab. It is designed to reduce dependence on high-consumption systems while
+            supporting real people with dignity.
+          </p>
+        </div>
+        <div class="icon-grid">
+          <article class="card">Field station for researchers and naturalists</article>
+          <article class="card">Dorms, simple rooms, and bring-your-own-tent stay</article>
+          <article class="card">Mud/earthen housing cluster and seasonal adaptation</article>
+          <article class="card">Workshop and school immersion campus</article>
+          <article class="card">Volunteer exchange and practical skill contribution</article>
+          <article class="card">Rural collaboration platform rooted in village interdependence</article>
         </div>
       </section>
 
-      <section class="section" id="why">
+      <section id="importance" class="section">
         <div class="section-header">
-          <p class="eyebrow">Why this idea exists</p>
-          <h2>Against greenwashing, toward practical low-impact living.</h2>
-          <p>
-            Modern life is increasingly wasteful and disconnected. Rural landscapes are under pressure while many
-            eco-stays sell image more than systems. Barahwan proposes a field-honest alternative: a place where
-            students, researchers, artists, naturalists, and school groups can stay, learn, and contribute through
-            realistic low-consumption systems.
-          </p>
+          <p class="eyebrow">2 · Why it is important</p>
+          <h2>Because extraction-led systems are failing land and people.</h2>
         </div>
         <div class="grid-2">
           <article class="card contrast-card bad">
-            <h3>Greenwashed eco-tourism</h3>
+            <h3>High-consumption status quo</h3>
             <ul>
-              <li>Concrete-heavy construction dressed up as “eco”</li>
-              <li>High water and energy demand</li>
-              <li>Waste shifted out of sight</li>
-              <li>Luxury framing over ecological accountability</li>
+              <li>Concrete-heavy expansion and heat stress</li>
+              <li>Waste and wastewater pushed out of sight</li>
+              <li>Rural landscapes treated as consumption backdrops</li>
+              <li>Communities excluded from value and decisions</li>
             </ul>
           </article>
           <article class="card contrast-card good">
-            <h3>Low-impact habitat model</h3>
+            <h3>Barahwan direction</h3>
             <ul>
-              <li>Earthen architecture and passive thermal design</li>
-              <li>Low-consumption living over comfort excess</li>
-              <li>Engineered natural treatment and nutrient cycling</li>
-              <li>Learning, stewardship, and local collaboration</li>
+              <li>Low-consumption living instead of luxury load</li>
+              <li>Engineered ecological sanitation and water loops</li>
+              <li>Village-linked stewardship and skill exchange</li>
+              <li>Habitat value for birds, pollinators, and people</li>
             </ul>
           </article>
         </div>
       </section>
 
-      <section class="section" id="what">
+      <section id="how" class="section">
         <div class="section-header">
-          <p class="eyebrow">What Barahwan is</p>
-          <h2>A hybrid campus model.</h2>
+          <p class="eyebrow">3 · How it works</p>
+          <h2>Climate-wise construction + circular systems + shared operations.</h2>
         </div>
-        <div class="icon-grid">
-          <article class="card">Field station</article>
-          <article class="card">Eco-stay + dorm cluster</article>
-          <article class="card">Mud housing campus</article>
-          <article class="card">School learning space</article>
-          <article class="card">Workshop venue</article>
-          <article class="card">Volunteer residency</article>
-          <article class="card">Slow living base</article>
-          <article class="card">Regenerative landscape model</article>
-          <article class="card">Rural collaboration platform</article>
-        </div>
-      </section>
 
-      <section class="section" id="climate">
-        <div class="section-header">
-          <p class="eyebrow">Built with climate, not against it</p>
-          <h2>Earthen architecture for thermal logic and repairability.</h2>
-        </div>
-        <div class="card diagram">
-          <svg viewBox="0 0 920 260" aria-label="Passive design section diagram">
-            <rect width="920" height="260" fill="#f5eee5" />
-            <rect x="160" y="120" width="560" height="80" fill="#b07a49" />
-            <polygon points="130,120 440,35 750,120" fill="#7f5937" />
-            <rect x="250" y="145" width="100" height="55" fill="#4f3b29" opacity="0.3" />
-            <rect x="530" y="145" width="120" height="55" fill="#4f3b29" opacity="0.3" />
-            <path d="M50 50 h100" stroke="#c78742" stroke-width="3" marker-end="url(#arr)" />
-            <path d="M860 70 h-100" stroke="#86a2b1" stroke-width="3" marker-end="url(#arr)" />
-            <path d="M420 35 v-25" stroke="#c78742" stroke-width="3" marker-end="url(#arr)" />
-            <defs>
-              <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-                <polygon points="0 0, 6 3, 0 6" fill="#66503e" />
-              </marker>
-            </defs>
-            <text x="40" y="40">Shaded verandah airflow</text>
-            <text x="728" y="62">Cross ventilation</text>
-            <text x="336" y="18">Thermal release</text>
-            <text x="300" y="225">Thick earthen walls store daytime heat, release slowly at night.</text>
+        <article class="card diagram">
+          <h3>Architecture logic</h3>
+          <svg viewBox="0 0 980 280" aria-label="Passive architecture section">
+            <rect width="980" height="280" fill="#f5eee5" />
+            <polygon points="160,148 488,56 816,148" fill="#7e5736" />
+            <rect x="190" y="148" width="596" height="96" fill="#b17c4b" />
+            <rect x="264" y="172" width="110" height="72" fill="#76563b" opacity=".3"/>
+            <rect x="608" y="172" width="124" height="72" fill="#76563b" opacity=".3"/>
+            <path d="M68 72 h125" stroke="#c48743" stroke-width="4" marker-end="url(#arr2)" />
+            <path d="M912 92 h-124" stroke="#7896a5" stroke-width="4" marker-end="url(#arr2)" />
+            <path d="M486 56 v-35" stroke="#c48743" stroke-width="4" marker-end="url(#arr2)" />
+            <defs><marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><polygon points="0 0, 6 3, 0 6" fill="#68513f" /></marker></defs>
+            <text x="64" y="58">Shaded edge cooling</text>
+            <text x="748" y="80">Cross-ventilation</text>
+            <text x="430" y="22">Thermal release</text>
+            <text x="248" y="262">Earthen thermal mass, natural ventilation, repairable materials, minimal appliance dependence.</text>
           </svg>
-        </div>
-      </section>
+        </article>
 
-      <section class="section" id="systems">
-        <div class="section-header">
-          <p class="eyebrow">Water, waste, and circular systems</p>
-          <h2>Engineered natural loops, no magical claims.</h2>
-        </div>
-        <div class="card diagram">
-          <svg viewBox="0 0 920 320" aria-label="Water and waste systems flow diagram">
-            <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><polygon points="0 0, 6 3, 0 6" fill="#5f7382" /></marker></defs>
-            <rect width="920" height="320" fill="#f6f2eb" />
-            <g class="flow-node"><rect x="40" y="60" width="140" height="58" rx="10"/><text x="57" y="95">Rainwater capture</text></g>
-            <g class="flow-node"><rect x="220" y="60" width="160" height="58" rx="10"/><text x="240" y="95">Underground tank</text></g>
-            <g class="flow-node"><rect x="420" y="60" width="170" height="58" rx="10"/><text x="436" y="95">Selective recharge</text></g>
-            <g class="flow-node"><rect x="640" y="60" width="220" height="58" rx="10"/><text x="658" y="95">Low-water washrooms</text></g>
-            <g class="flow-node"><rect x="110" y="200" width="190" height="68" rx="10"/><text x="126" y="238">Safe ecological sanitation</text></g>
-            <g class="flow-node"><rect x="350" y="200" width="230" height="68" rx="10"/><text x="365" y="238">Greywater reed-bed + sand/gravel</text></g>
-            <g class="flow-node"><rect x="640" y="200" width="220" height="68" rx="10"/><text x="665" y="238">Landscape reuse + habitat</text></g>
-            <path class="flow-line" d="M180 89 H220" />
-            <path class="flow-line" d="M380 89 H420" />
-            <path class="flow-line" d="M590 89 H640" />
-            <path class="flow-line" d="M750 118 V200" />
-            <path class="flow-line" d="M640 234 H580" />
-            <path class="flow-line" d="M350 234 H300" />
-            <text x="42" y="292">No untreated wastewater discharged into streams or natural drains.</text>
+        <article class="card diagram">
+          <h3>Water and waste flow</h3>
+          <svg viewBox="0 0 980 340" aria-label="Water and sanitation flow chart">
+            <defs><marker id="arw" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><polygon points="0 0, 6 3, 0 6" fill="#5b7180"/></marker></defs>
+            <rect width="980" height="340" fill="#f6f2eb" />
+            <g class="flow-node"><rect x="42" y="78" width="178" height="58" rx="10"/><text x="68" y="113">Rainwater capture</text></g>
+            <g class="flow-node"><rect x="262" y="78" width="210" height="58" rx="10"/><text x="295" y="113">Underground storage</text></g>
+            <g class="flow-node"><rect x="518" y="78" width="190" height="58" rx="10"/><text x="548" y="113">Selective recharge</text></g>
+            <g class="flow-node"><rect x="736" y="78" width="196" height="58" rx="10"/><text x="756" y="113">Low-water washrooms</text></g>
+            <g class="flow-node"><rect x="132" y="212" width="220" height="68" rx="10"/><text x="150" y="251">Safe ecological sanitation</text></g>
+            <g class="flow-node"><rect x="392" y="212" width="248" height="68" rx="10"/><text x="415" y="251">Greywater gravel/sand/root-zone</text></g>
+            <g class="flow-node"><rect x="684" y="212" width="224" height="68" rx="10"/><text x="719" y="251">Landscape reuse loop</text></g>
+            <path class="flow-line" d="M220 108 H262"/><path class="flow-line" d="M472 108 H518"/><path class="flow-line" d="M708 108 H736"/><path class="flow-line" d="M830 136 V212"/><path class="flow-line" d="M684 246 H640"/><path class="flow-line" d="M392 246 H352"/>
+            <text x="42" y="316">No untreated wastewater release into natural drains or streams.</text>
           </svg>
-        </div>
+        </article>
       </section>
 
-      <section class="section" id="food-forest">
+      <section id="phases" class="section">
         <div class="section-header">
-          <p class="eyebrow">Food forest, landscape, and habitat value</p>
-          <h2>Productive landscape that also supports biodiversity.</h2>
+          <p class="eyebrow">4 · Phase-wise development</p>
+          <h2>Start small. Build credibility first. Expand as systems stabilize.</h2>
         </div>
-        <div class="card layers">
-          <div>Canopy fruit trees</div><div>Understory and shrubs</div><div>Herbs and nitrogen-fixing groundcover</div><div>Mulch and soil moisture retention</div><div>Insects + pollinator corridors</div><div>Bird perches and habitat edge</div>
-        </div>
-      </section>
-
-      <section class="section" id="stay">
-        <div class="section-header">
-          <p class="eyebrow">How people stay and contribute</p>
-          <h2>Mixed participation model: monetary + contribution-based.</h2>
-        </div>
-        <div class="grid-2">
-          <article class="card">
-            <h3>Stay formats</h3>
+        <div class="phase-grid">
+          <article class="card phase-card">
+            <h3>Phase 1 · Starter base</h3>
+            <p>Dorm + tent campus, shared kitchen, low-water sanitation, and first water loops.</p>
             <ul>
-              <li>Simple rooms and dorm beds</li>
-              <li>Bring-your-own-tent zone</li>
-              <li>Volunteer stays and skill exchange</li>
-              <li>Research residencies and school field camps</li>
-              <li>Naturalist and photographer base</li>
+              <li>Implementation priority: <strong>40%</strong></li>
+              <li>Operational focus: hosting small groups safely</li>
+              <li>Goal: proof of discipline, care, and reliability</li>
             </ul>
           </article>
-          <article class="card">
-            <h3>Support model</h3>
+          <article class="card phase-card">
+            <h3>Phase 2 · Learning and workshop layer</h3>
+            <p>Workshop court, school modules, volunteer residency protocols, and habitat observation trails.</p>
             <ul>
-              <li>Paid stays and habitat experiences</li>
-              <li>Workshops and learning programs</li>
-              <li>Revenue for food, wages, repairs, and maintenance</li>
-              <li>Skill-for-stay contributions where useful</li>
-              <li>Not profit-maximizing hospitality</li>
+              <li>Implementation priority: <strong>35%</strong></li>
+              <li>Operational focus: education and field practice</li>
+              <li>Goal: stronger contribution and collaboration network</li>
+            </ul>
+          </article>
+          <article class="card phase-card">
+            <h3>Phase 3 · Housing and resilience deepening</h3>
+            <p>Expanded earthen housing, mature orchard systems, and higher autonomy in maintenance cycles.</p>
+            <ul>
+              <li>Implementation priority: <strong>25%</strong></li>
+              <li>Operational focus: long-term stability</li>
+              <li>Goal: resilient campus with dignified local livelihoods</li>
             </ul>
           </article>
         </div>
+
+        <article class="card split-flow">
+          <h3>How support is distributed (percentage model)</h3>
+          <div class="bars">
+            <div><span>Core operations and food</span><strong>22%</strong></div>
+            <div><span>Local wages and collaborations</span><strong>24%</strong></div>
+            <div><span>Water, sanitation, and systems upkeep</span><strong>16%</strong></div>
+            <div><span>Habitat and orchard care</span><strong>14%</strong></div>
+            <div><span>Learning/workshops/school programs</span><strong>14%</strong></div>
+            <div><span>Resilience reserve and repairs</span><strong>10%</strong></div>
+          </div>
+        </article>
       </section>
 
-      <section class="section" id="economics">
+      <section id="join" class="section">
         <div class="section-header">
-          <p class="eyebrow">Sample economics and viability (illustrative)</p>
-          <h2>Financially modest, ecologically rich, operationally light.</h2>
-        </div>
-        <div class="estimate-grid">
-          <article class="card"><h3>Land lease/partnership</h3><p>₹8–15 lakh / year equivalent</p></article>
-          <article class="card"><h3>Earthen construction</h3><p>₹35–55 lakh pilot phase</p></article>
-          <article class="card"><h3>Water + sanitation systems</h3><p>₹14–24 lakh setup</p></article>
-          <article class="card"><h3>Dorm, tent, kitchen, workshop</h3><p>₹20–32 lakh</p></article>
-          <article class="card"><h3>Orchard + habitat landscape</h3><p>₹6–12 lakh establishment</p></article>
-          <article class="card"><h3>Annual staffing + maintenance</h3><p>₹18–30 lakh</p></article>
-        </div>
-        <div class="card money-flow">
-          <h3>Where funds come from and where they go</h3>
-          <p>Streams: stays, school visits, workshops, habitat experiences, aligned contributions, small local products.</p>
-          <p>Allocation: food, wages, repairs, volunteer support, learning programs, habitat care, resilience upgrades.</p>
-        </div>
-      </section>
-
-      <section class="section" id="future">
-        <div class="section-header">
-          <p class="eyebrow">Why this matters in the future</p>
-          <h2>Lower-consumption local campuses are practical adaptation infrastructure.</h2>
-        </div>
-        <div class="grid-2">
-          <article class="card contrast-card bad">
-            <h3>High-consumption lifestyle</h3>
-            <ul><li>Resource-intensive comfort systems</li><li>Long supply chain fragility</li><li>Social isolation and ecological detachment</li></ul>
-          </article>
-          <article class="card contrast-card good">
-            <h3>Resilient landscape campus</h3>
-            <ul><li>Modest demand and local loops</li><li>Grounded learning and practical skills</li><li>Distributed, collaborative stewardship</li></ul>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="care">
-        <div class="section-header">
-          <p class="eyebrow">Safety, dignity, and care</p>
-          <h2>Humane standards are non-negotiable.</h2>
-        </div>
-        <div class="icon-grid">
-          <article class="card">Women/child-safe movement protocols</article>
-          <article class="card">Codes of conduct and accountability</article>
-          <article class="card">Clean, dignified sanitation and hygiene</article>
-          <article class="card">Guided routes in habitat zones</article>
-          <article class="card">Shaded rest, drinking water, first aid</article>
-          <article class="card">Mutual care and community trust</article>
-        </div>
-      </section>
-
-      <section class="section" id="local-value">
-        <div class="section-header">
-          <p class="eyebrow">Local benefit and shared value</p>
-          <h2>Collaboration over extraction.</h2>
+          <p class="eyebrow">5 · Volunteer and proposal call</p>
+          <h2>Help shape the pilot.</h2>
           <p>
-            The model prioritizes local cooks, builders, growers, guides, and craftspeople; supports school learning;
-            and values local and tribal knowledge through partnership, not saviourism.
+            We are inviting landowners, architects, mud builders, hydrologists, geologists, ecologists, naturalists,
+            educators, researchers, and aligned supporters to help build the first practical phase.
           </p>
         </div>
-      </section>
 
-      <section class="section" id="join">
-        <div class="section-header">
-          <p class="eyebrow">Join the idea</p>
-          <h2>Build the pilot with us.</h2>
-        </div>
         <div class="icon-grid invitations">
-          <article class="card">Landowners</article><article class="card">Architects & mud builders</article><article class="card">Hydrologists & geologists</article><article class="card">Ecologists & naturalists</article><article class="card">Researchers & educators</article><article class="card">Workshop leaders</article><article class="card">Photographers</article><article class="card">Volunteers & schools</article><article class="card">Aligned supporters</article><article class="card">Long-term backers</article>
+          <article class="card">Offer land or landscape partnership</article>
+          <article class="card">Volunteer technical skills</article>
+          <article class="card">Host or co-design workshops</article>
+          <article class="card">Support water and sanitation planning</article>
+          <article class="card">Join research and documentation</article>
+          <article class="card">Back the founding circle</article>
         </div>
-        <div class="cta-row wrap">
-          <a href="#interest" class="btn btn-primary">Help build the pilot</a>
-          <a href="#interest" class="btn btn-secondary">Collaborate on water and landscape systems</a>
-          <a href="#interest" class="btn btn-secondary">Join the founding circle</a>
-        </div>
-      </section>
 
-      <section class="section" id="interest">
-        <div class="section-header">
-          <p class="eyebrow">Expression of interest</p>
-          <h2>Tell us how you want to contribute.</h2>
-        </div>
-        <form class="card form-grid">
-          <label>Name<input type="text" name="name" required /></label>
-          <label>Email<input type="email" name="email" required /></label>
-          <label>Role
-            <select name="role">
-              <option>Landowner</option><option>Architect / builder</option><option>Researcher / educator</option><option>Volunteer</option><option>Supporter / backer</option>
+        <form id="interest" class="card form-grid">
+          <label>Name<input type="text" required /></label>
+          <label>Email<input type="email" required /></label>
+          <label>Contribution type
+            <select>
+              <option>Land partnership</option>
+              <option>Architecture / mud building</option>
+              <option>Water / sanitation systems</option>
+              <option>Workshops / education</option>
+              <option>Volunteer contribution</option>
+              <option>Aligned support / backing</option>
             </select>
           </label>
-          <label>How can you contribute?
-            <textarea rows="5" placeholder="Land partnership, design, hydrology, workshops, volunteer skills, or aligned support."></textarea>
+          <label>Proposal details
+            <textarea rows="5" placeholder="Tell us how you want to contribute to Phase 1, Phase 2, or Phase 3."></textarea>
           </label>
-          <button class="btn btn-primary" type="submit">Send expression of interest</button>
+          <button type="submit" class="btn btn-primary">Send proposal</button>
         </form>
       </section>
 
-      <section class="section closing" id="manifesto">
-        <h2>Not a resort. A more honest way to live on the land.</h2>
-        <p>Not utopia. Just a practical survival model.</p>
-        <p>A place to stay, learn, build, and coexist without standing on the throat of the landscape.</p>
+      <section id="future" class="section closing">
+        <p class="eyebrow">6 · Why this gives hope</p>
+        <h2>In climate stress, conflict, and unstable economies, smaller resilient systems matter.</h2>
+        <p>
+          Barahwan is not utopia. It is a practical path: lower consumption, shared stewardship, safer sanitation,
+          local dignity, and habitat care that can be built phase by phase.
+        </p>
+        <p>
+          Not a fantasy retreat. A serious model for how people and landscapes may survive together with less harm.
+        </p>
       </section>
     </main>
 
