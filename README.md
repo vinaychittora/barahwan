@@ -90,6 +90,7 @@ Set these in **Cloudflare Pages → Settings → Environment variables**:
 - `TURNSTILE_SECRET` — your Turnstile secret key
 - `CONTACT_EMAIL` — destination inbox (example: `hello@caneandcamera.com`)
 - `FROM_EMAIL` — sender identity for MailChannels (example: `barahwan-form@pages.dev`)
+- `RESEND_API_KEY` *(optional, recommended fallback)* — if present, the API sends mail through Resend instead of MailChannels
 
 ### Turnstile site key in the frontend
 
@@ -113,3 +114,9 @@ This sequence usually means:
 3. Retrying with the same token triggers Turnstile duplicate rejection (`403 timeout-or-duplicate`).
 
 The frontend now resets Turnstile after failed submissions so users can solve a fresh challenge before retrying.
+
+### If you see an HTML 502 page instead of JSON
+
+If the browser/devtools shows `Unexpected token '<'`, `/api/interest` returned HTML (usually Cloudflare 502) rather than JSON.
+
+The frontend now detects this and reports `cloudflare_upstream_502` so you can distinguish routing/upstream failures from normal validation errors.

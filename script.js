@@ -24,6 +24,31 @@ const form = document.querySelector('#interest');
 const statusText = document.querySelector('.form-status');
 
 if (form) {
+  const readErrorResponse = async (response) => {
+    const contentType = response.headers.get('content-type') || '';
+    if (contentType.includes('application/json')) {
+      const data = await response.json();
+      return {
+        error: data.error || 'Submission failed.',
+        reason: data.reason || ''
+      };
+    }
+
+    const text = await response.text();
+    const cloudflare502 = text.includes('<title>') && text.includes('502');
+    if (cloudflare502) {
+      return {
+        error: 'Submission route is returning an upstream 502 before JSON response.',
+        reason: 'cloudflare_upstream_502'
+      };
+    }
+
+    return {
+      error: `Submission failed with status ${response.status}.`,
+      reason: 'non_json_error_response'
+    };
+  };
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const submit = form.querySelector('button[type="submit"]');
@@ -57,12 +82,12 @@ if (form) {
       });
 
       if (!response.ok) {
-        const data = await response.json();
-        if (data.reason === 'timeout-or-duplicate') {
+        const failure = await readErrorResponse(response);
+        if (failure.reason === 'timeout-or-duplicate') {
           throw new Error('Verification expired. Please complete Turnstile again and resubmit.');
         }
-        const detail = data.reason ? ` (${data.reason})` : '';
-        throw new Error((data.error || 'Submission failed.') + detail);
+        const detail = failure.reason ? ` (${failure.reason})` : '';
+        throw new Error((failure.error || 'Submission failed.') + detail);
       }
 
       statusText.textContent = 'Proposal received. We will reach out shortly.';

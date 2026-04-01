@@ -1,6 +1,7 @@
 const MAX_BODY_SIZE = 8_000;
 const ALLOWED_ORIGIN_PROTOCOLS = new Set(['https:']);
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const UPSTREAM_TIMEOUT_MS = 8000;
 
 function jsonResponse(status, payload) {
   return new Response(JSON.stringify(payload), {
@@ -27,7 +28,7 @@ async function verifyTurnstile(token, ip, secret) {
     form.set('response', token);
     if (ip) form.set('remoteip', ip);
 
-    const result = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    const result = await fetchWithTimeout('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
       method: 'POST',
       body: form
     });
@@ -46,7 +47,66 @@ async function verifyTurnstile(token, ip, secret) {
   }
 }
 
+async function fetchWithTimeout(url, options = {}, timeoutMs = UPSTREAM_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort('upstream_timeout'), timeoutMs);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
+async function sendViaResend(env, fields) {
+  if (!env.RESEND_API_KEY) {
+    return { ok: false, status: 0, detail: 'resend_not_configured' };
+  }
+
+  const recipient = env.CONTACT_EMAIL || 'hello@caneandcamera.com';
+  const sender = env.FROM_EMAIL || 'no-reply@barahwan.org';
+  const response = await fetchWithTimeout('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${env.RESEND_API_KEY}`
+    },
+    body: JSON.stringify({
+      from: sender,
+      to: [recipient],
+      reply_to: fields.email,
+      subject: `New Barahwan form entry from ${fields.name}`,
+      text: [
+        'New expression of interest',
+        `Name: ${fields.name}`,
+        `Email: ${fields.email}`,
+        `Contribution type: ${fields.type}`,
+        `Message: ${fields.message}`,
+        `Submitted at: ${new Date().toISOString()}`
+      ].join('\n')
+    })
+  });
+
+  if (response.ok) {
+    return { ok: true, status: response.status, detail: '' };
+  }
+
+  const detail = (await response.text()).slice(0, 300);
+  return { ok: false, status: response.status, detail: detail || 'resend_delivery_failed' };
+}
+
 async function sendEmail(env, fields) {
+  if (env.RESEND_API_KEY) {
+    try {
+      const resendDelivery = await sendViaResend(env, fields);
+      if (resendDelivery.ok) {
+        return resendDelivery;
+      }
+      return resendDelivery;
+    } catch {
+      return { ok: false, status: 0, detail: 'resend_request_failed' };
+    }
+  }
+
   const recipient = env.CONTACT_EMAIL || 'hello@caneandcamera.com';
   const sender = env.FROM_EMAIL || 'no-reply@barahwan.org';
   const payload = {
@@ -73,7 +133,7 @@ async function sendEmail(env, fields) {
   };
 
   try {
-    const response = await fetch('https://api.mailchannels.net/tx/v1/send', {
+    const response = await fetchWithTimeout('https://api.mailchannels.net/tx/v1/send', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(payload)
@@ -85,7 +145,10 @@ async function sendEmail(env, fields) {
 
     const detail = (await response.text()).slice(0, 300);
     return { ok: false, status: response.status, detail };
-  } catch {
+  } catch (error) {
+    if (error && error.name === 'AbortError') {
+      return { ok: false, status: 0, detail: 'mailchannels_timeout' };
+    }
     return { ok: false, status: 0, detail: 'mailchannels_request_failed' };
   }
 }
